@@ -1,6 +1,8 @@
 https://www.youtube.com/watch?v=yIs_Y5adAYU
 
 
+//https://www.youtube.com/watch?v=ZOfsXAUX0Qs   : Funda of web it
+
 <%- include header %>
 <html lang="en">
 
