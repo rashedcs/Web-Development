@@ -2,7 +2,7 @@ https://jsfiddle.net/m9cudt3k/
 http://javascript-coder.com/javascript-form/javascript-calculator-script.phtml
 https://jsfiddle.net/flamedenise/fpovk96p/
 https://www.youtube.com/watch?v=vkBiEuZSq9s
-
+http://javalearning-adventure.blogspot.com/2010/08/javascript-real-time-calculation.html
 
 
 <script type='text/javascript' >
