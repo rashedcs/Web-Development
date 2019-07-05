@@ -1,5 +1,6 @@
 https://jsfiddle.net/m9cudt3k/
 http://javascript-coder.com/javascript-form/javascript-calculator-script.phtml
+https://jsfiddle.net/flamedenise/fpovk96p/
 
 <form>
 <label>first name:</label><input id="firstName1"/>
