@@ -1,123 +1,147 @@
-ideone.com/ZaY9Lv
-
-
-
-
-
-index.php =>
+/* index.php */
 <html>
  <head>
-   <title>Scholl Record</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-   <script>
-		function ajax_request(add_new_record)
+   <title>School Record</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 
+     <style>
+		.btn, .form-control
+		{
+			border-radius: 0;
+		}
+	</style>
+	</head>
+ 
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>School Record</h1>
+			</div>
+ 
+			<div class="form-horizontal">
+ 
+				<div class="form-group">
+					<label class="control-label col-md-2">Student Name </label>
+					<div class="col-md-8">
+						<input type="text" id="student_name" class="form-control">
+					</div>
+				</div>
+ 
+				<div class="form-group">
+					<label class="control-label col-md-2">Student Subject </label>
+					<div class="col-md-3">
+						<select id="student_subject" class="form-control">
+							<option> Psychology </option>
+							<option> Bangla </option>
+						</select>
+					</div>
+				</div>
+ 
+				<div class="form-group">
+				    <label class="control-label col-md-2">Student Fee</label>
+				    <div class="col-md-3">
+					   <input type="number" id="student_fee" class="form control">
+				   </div>
+				</div>
+ 
+ 
+				<div class="form-group">
+					<div class="col-md-8 col-md-offset-2">
+						<button class="btn btn-danger btn-block" onclick="myfunction();"> Add New Record </button>
+					</div>
+				</div>
+			</div>
+ 
+			<table class="table table-striped">
+					<thead> 
+						<tr class="success">
+							<th>S no </th>
+							<th> Student Name </th>
+							<th> Student Subject </th>
+							<th> Student Fee </th>
+							<th> Actions </th>
+						</tr>
+					</thead>
+					<tbody id="test">
+					</tbody>
+				</table>
+			</div>
+			
+			
+	   <script>
+		function myfunction()
 		{
 			var student_name = document.getElementById('student_name').value;
 			var student_subject = document.getElementById('student_subject').value;
-			var student_subject = document.getElementById('student_fee').value;
-			
-			if(add_new_record==undefined)
+			var student_fee = document.getElementById('student_fee').value;
+
+ 
+			var request = new XMLHttpRequest();
+			request.onreadystatechange = function() 
 			{
-				add_new_record = '';
-			}
-			else
-			{
-				alert(add_new_record);
-			}
-			if(student_name='')
-			{
-				student_name='';
-			}
-			if(student_subject=='')
-			{
-				student_subject='';
-			}
-		   if(student_fee=='')
-			{
-				student_fee='';
-			}
-			var xmlhttp = new XMLHttpRequest();
-			
-			xmlhttp.onreadystatechange = function()
-			{
-				if(xmlhttp.readState == 4 && xmlhttp.status == 200)
+				if (request.readyState == 4 && request.status == 200)
 				{
-				  var test_div = document.getElementById('test');
-				  test_div.innerHTML = xmlhttp.responseText;
+				   document.getElementById("test").innerHTML = request.responseText;
 				}
-			}
-			xmlhttp.open('GET', 'data.php?add_req=' +add_new_record+ '&stu_name=' +student_name+ 
-      '&stu_subject=' +student_subject+ '&stu_fee=' +student_fee,true);
-			xmlhttp.send();		
+			};
+			 request.open("POST","data.php?name="+student_name+"&subject="+student_subject+"&fee="+student_fee,true);
+			 request.send();
 		}
-		</script
-    
-    
-    
-    
-    
-    data.php =>
-    
-   <?php
-  include 'db.php';
-  
-  if($_REQUEST['add_req']!='')
-  {
-	  $student_name = $_REQUEST['stu_name'];
-	  $student_subject = $REQUEST['student_subject'];
-	  $student_fee = $_REQUEST['student_fee'];
-	  $ins_sql = "insert into student_data(student_name, student_subject,student_fee) 
-    values('$student_name','$student_subject','$student_fee')";
-	  $run_sql = mysqli_query($conn, $ins_sql);
-	  
-	  $sql = "select * from student_data";
-	  $run = mysqli_query($conn, $sql);
-	  
-	  while($rows = mysqli_fetch_assoc($run)) 
-	  {?>
-		<tr>
-			<td> 2 </td>
-			<td> <?php echo $rows['student_name']; ?></td>
-			<td> <?php echo $rows['student_subject']; ?> </td>
-			<td> <?php echo $rows['student_fee']; ?> </td>
-			<td> 
-				<div class="dropdown">
-				  <button class="btn btn-primary" data-toggle="dropdown" >Actions <span class="caret"> </span> </button>
-					<ul class="dropdown">
-						<li> <a href="#">Edit </a> </li>
-						<li> <a href="#">Delete </a> </li>
-					</ul>
-				 </div>
-			 </td>
-			</tr>
-		<?php
-	  }
-	  ?>
-	  }
-  }
-?>
+	   </script>
+</body>
+</html>
 
 
-  db.php =>
-  
+
+
+
+
 <?php
-	$server = 'localhost';
-	$user = 'rasu' ;
-	$password = '';
-	$db = 'test'
+    /* data.php */
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname="test";
 
-	$conn = mysqli_connect($server, $user, $password, $db);
+		$conn = new mysqli($servername, $username, $password , $dbname);
+		
+		
+		if ($conn->connect_error) 
+		{
+			die("Connection failed: " . $connection->connect_error);
+		}
+
+
+		$student_name = $_REQUEST['name'];
+		$student_subject =  $_REQUEST['subject'];
+		$student_fee =  $_REQUEST['fee'];
+		$ins_sql = "insert into student_data(student_name, student_subject,student_fee)  values('$student_name','$student_subject','$student_fee')"; /* name : string, subject: string, fee: integer */
+		$run_sql = mysqli_query($conn, $ins_sql);
+		$sql = "select * from student_data";
+		$run = mysqli_query($conn, $sql);
+		  
+		  
+		echo "<table>
+		<tr>
+		<th>Id</th>
+		<th> Name</th>
+		<th>Born</th>
+		</tr>";
+		while($row = mysqli_fetch_array($run)) 
+		{
+			echo "<tr>";
+			echo "<td>" . $row['student_name'] .  "</td>";
+			echo "<td>" . $row['student_subject'] . "</td>";
+			echo "<td>" . $row['student_fee'] . "</td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+	  
 ?>
-    
-    
-    
-    
-    
-    
-    
-    
-    
+//Daught : ideone.com/ZaY9Lv
 
-    
+
+
+
