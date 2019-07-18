@@ -114,7 +114,8 @@
 		$student_name = $_REQUEST['name'];
 		$student_subject =  $_REQUEST['subject'];
 		$student_fee =  $_REQUEST['fee'];
-		$ins_sql = "insert into student_data(student_name, student_subject,student_fee)  values('$student_name','$student_subject','$student_fee')"; /* name : string, subject: string, fee: integer */
+		$ins_sql = "insert into student_data(student_name, student_subject,student_fee) 
+		values('$student_name','$student_subject','$student_fee')"; /* name : string, subject: string, fee: integer */
 		$run_sql = mysqli_query($conn, $ins_sql);
 		$sql = "select * from student_data";
 		$run = mysqli_query($conn, $sql);
