@@ -1,4 +1,4 @@
-public function updatePayment(Request $request) {
+public function updateImage(Request $request) {
     $id = $request->input('pid');
     $old = $request->input('old');
 
