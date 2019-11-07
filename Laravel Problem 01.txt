@@ -14,4 +14,6 @@ CREATE TABLE `file` (
 
 
 INSERT INTO `quaterly_report` (`id`, `title`, created_at, `updated_at`, `status`) 
-VALUES (0, 'file12','2019-09-08 15:12:10', '2019-10-09 15:12:10', 1);
+VALUES (1, 'file12','2019-09-08 15:12:10', '2019-10-09 15:12:10', 1);
+
+If you set id=0, no problem will ocurrs because it will automatically set 0 to 1. Starting point is 1.
