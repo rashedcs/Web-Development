@@ -1,0 +1,3 @@
+add 
+php_flag display_errors on
+on .htaccsee
